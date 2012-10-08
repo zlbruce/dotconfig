@@ -310,7 +310,7 @@ defaults = defaultConfig {
 
 getDmenuInput = fmap (filter isPrint) $ runProcessWithInput "dmenu" ["-p", "Dict: "] ""
 
-sdcv word  = do
+sdcv word = do
     output <- runProcessWithInput "sdcv" ["-n", word] ""
     mySafeSpawn "notify-send" [word, trString output]
 
