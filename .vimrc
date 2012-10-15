@@ -87,4 +87,13 @@ set cino=g0
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 
+" vim-powerline
+let g:Powerline_symbols = 'fancy'
+set laststatus=2
+
+"CtrlP
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
 call pathogen#infect() 
+call pathogen#helptags()
+

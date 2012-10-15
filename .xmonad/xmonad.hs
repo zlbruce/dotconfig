@@ -15,16 +15,20 @@ import System.Exit
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+import XMonad.ManageHook
 import XMonad.Util.Run
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageHelpers
 import XMonad.Util.Cursor
 import XMonad.Util.XSelection
-import XMonad.Actions.Volume
-import Graphics.X11.Xlib
 import XMonad.Util.XUtils
-import XMonad.ManageHook
+import XMonad.Actions.Volume
+import XMonad.Layout.PerWorkspace
+import XMonad.Layout.NoBorders
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageHelpers
+import XMonad.Prompt
+import XMonad.Prompt.Input
 import System.Posix.Process (createSession, executeFile, forkProcess)
+import Graphics.X11.Xlib
 
 
 -- The preferred terminal program, which is used in a binding below and by
@@ -138,7 +142,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- ²éÑ¯×Öµä
     , ((modm              , xK_s),      getSelection  >>= sdcv)
-    , ((modm .|. shiftMask, xK_s),      getDmenuInput >>= sdcv)
+    , ((modm .|. shiftMask, xK_s),      getPromptInput ?+ sdcv)
+    --, ((modm .|. shiftMask, xK_s),      getDmenuInput >>= sdcv)
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
@@ -201,7 +206,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = smartBorders $ onWorkspace "X" (Full ||| tiled ||| Mirror tiled) (tiled ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -235,7 +240,11 @@ myManageHook = composeAll
     , className =? "Gimp"           --> doFloat
     , isFullscreen                  --> doFullFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "kdesktop"       --> doIgnore 
+    , className =? "Firefox"        --> doShift "W"
+    , className =? "Pidgin"         --> doShift "I"
+    , className =? "VirtualBox"     --> doShift "X"
+    ]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -308,7 +317,8 @@ defaults = defaultConfig {
         startupHook        = myStartupHook
     }
 
-getDmenuInput = fmap (filter isPrint) $ runProcessWithInput "dmenu" ["-p", "Dict: "] ""
+--getDmenuInput = fmap (filter isPrint) $ runProcessWithInput "dmenu" ["-p", "Dict: "] ""
+getPromptInput = inputPrompt defaultXPConfig "Dict: "
 
 sdcv word = do
     output <- runProcessWithInput "sdcv" ["-n", word] ""
