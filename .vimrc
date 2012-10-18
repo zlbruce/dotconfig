@@ -83,6 +83,9 @@ augroup end
 set showmode
 set showcmd
 set cino=g0
+" undo
+set undodir=/tmp/
+set undofile
 " minibuffer
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
@@ -93,6 +96,10 @@ set laststatus=2
 
 "CtrlP
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+" vimwiki
+let g:vimwiki_camel_case = 0
+let g:vimwiki_hl_cb_checked = 1
 
 call pathogen#infect() 
 call pathogen#helptags()
