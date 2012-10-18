@@ -13,7 +13,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-" ÎªÁËvim fcitx£¬ÉèÖÃÏÂÑÓ³ÙÊ±¼äÎª×î¶ÌÖµ
+" ä¸ºäº†vim fcitxï¼Œè®¾ç½®ä¸‹å»¶è¿Ÿæ—¶é—´ä¸ºæœ€çŸ­å€¼
 set ttm=100
 
 " set txtbrowser
@@ -32,7 +32,7 @@ let Tlist_Use_Right_Window = 1
 set t_Co=256
 "set background=dark
 colorscheme desert256
-"ÉèÖÃ±³¾°ÎªÍ¸Ã÷
+"è®¾ç½®èƒŒæ™¯ä¸ºé€æ˜
 hi Normal ctermbg=None
 hi NonText ctermbg=None
 
