@@ -36,6 +36,12 @@ colorscheme desert256
 hi Normal ctermbg=None
 hi NonText ctermbg=None
 
+" set tags
+set tags+=../tags                                                                                                   
+set tags+=../../tags                                                                                                
+set tags+=../../../tags                                                                                             
+set tags+=../../../../tags                                                                                          
+
 " set hjkl in insert mode
 "imap <A-h> <Left>
 "imap <A-j> <Down>
@@ -100,6 +106,24 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " vimwiki
 let g:vimwiki_camel_case = 0
 let g:vimwiki_hl_cb_checked = 1
+
+let wiki_1 = {}
+let wiki_1.path = '~/vimwiki/'
+let wiki_1.path_html = '~/vimwiki_html/'
+"let wiki_1.template_default = 'def_template'
+let wiki_1.template_default = 'default'
+let wiki_1.template_path = '~/vimwiki/template/'
+let wiki_1.template_ext = '.html'
+let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'bash': 'sh', 'html': 'html'}
+let wiki_1.css_name = 'css/style.css'
+
+let g:vimwiki_list = [wiki_1]
+
+let g:vimwiki_debug = 1
+let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr,a'
+let g:vimwiki_folding = 1
+let g:vimwiki_hl_headers = 1
+nmap <leader>tt <Plug>VimwikiToggleListItem
 
 call pathogen#infect() 
 call pathogen#helptags()

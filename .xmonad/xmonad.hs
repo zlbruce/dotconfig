@@ -28,13 +28,12 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Prompt
 import XMonad.Prompt.Input
 import System.Posix.Process (createSession, executeFile, forkProcess)
-import Graphics.X11.Xlib
 
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "Terminal"
+myTerminal      = "xfce4-terminal"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool

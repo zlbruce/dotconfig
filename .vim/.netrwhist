@@ -1,4 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/home/zhanglei/.runicgames/Torchlight'
-let g:netrw_dirhist_2='/home/zhanglei/.mozilla/firefox/ik0onaj6.default/ScrapBook/data/20120921093502'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/zhanglei/vimwiki/template'
+let g:netrw_dirhist_2='/home/zhanglei/.config/fcitx/conf'
+let g:netrw_dirhist_3='/home/zhanglei/work/svn/ad4.5/Alternate/apps/ad_nat_log'
+let g:netrw_dirhist_4='/home/zhanglei/study/mod-spdy-read-only/src/build'
+let g:netrw_dirhist_5='/home/zhanglei/work/svn/ad/Personal Directory/zhanglei/spdy/ad_appd/src/spdylaylib'
