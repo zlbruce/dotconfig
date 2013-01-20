@@ -90,8 +90,10 @@ set showmode
 set showcmd
 set cino=g0
 " undo
-set undodir=/tmp/
-set undofile
+if v:version >= 703
+    set undodir=/tmp/
+    set undofile
+endif
 " minibuffer
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
@@ -124,6 +126,9 @@ let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr,a'
 let g:vimwiki_folding = 1
 let g:vimwiki_hl_headers = 1
 nmap <leader>tt <Plug>VimwikiToggleListItem
+
+"tagbar
+nmap <F8> :TagbarToggle<CR>
 
 call pathogen#infect() 
 call pathogen#helptags()
