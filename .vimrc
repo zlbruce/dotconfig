@@ -1,4 +1,23 @@
 set nocompatible
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+"
+" original repos on github
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'mileszs/ack.vim'
+Bundle 'kien/ctrlp.vim'
+Bundle 'sjl/gundo.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'majutsushi/tagbar'
 
 " Enable filetype plugin
 filetype plugin on
@@ -130,6 +149,4 @@ nmap <leader>tt <Plug>VimwikiToggleListItem
 "tagbar
 nmap <F8> :TagbarToggle<CR>
 
-call pathogen#infect() 
-call pathogen#helptags()
 
