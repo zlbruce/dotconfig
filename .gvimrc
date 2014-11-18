@@ -1,2 +1,2 @@
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 14
+set guifont=Monospace\ 14
 set guioptions=
