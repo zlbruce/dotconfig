@@ -1,46 +1,78 @@
-" 	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" and run
-" 	:PluginInstall
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" Install vim-plug first:
+"   curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" == GUI Setting {{{
+if has('gui_running')
+    set guifont=JetBrains\ Mono\ 10
+    set guioptions=aeMrL
+    set lines=59 columns=237
+endif
+" }}}
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+" == Plugin Install {{{
+call plug#begin('~/.vim/plugged')
 
-" My Bundles here:
-"
-" original repos on github
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'mileszs/ack.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'sjl/gundo.vim'
-"Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'vimwiki/vimwiki'
-Plugin 'bling/vim-airline'
-Plugin 'godlygeek/tabular'
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'scrooloose/syntastic'
-"Plugin 'vim-pandoc/vim-pandoc'
+Plug 'itchyny/lightline.vim'
+Plug 'yggdroot/leaderf'
+Plug 'lifepillar/vim-solarized8'
+Plug 'easymotion/vim-easymotion'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+call plug#end()
+" }}}
+
+" == Setting table {{{
+set backspace=indent,eol,start
+set tabstop=4
+set shiftwidth=4
+set expandtab
+" }}}
+
+" == Setting theme{{{
+if exists('+termguicolors')
+    let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
+set background=light
+colorscheme solarized8
+" }}}
+
+" == Setting lightline {{{
+set laststatus=2
+set noshowmode
+let g:lightline = {
+    \ 'component': {
+    \   'lineinfo': ' %3l:%-2c',
+    \ },
+    \ 'colorscheme': 'solarized',
+    \ 'component_function': {
+    \   'readonly': 'LightlineReadonly',
+    \   'fugitive': 'LightlineFugitive'
+    \ },
+    \ 'separator': { 'left': '', 'right': '' },
+    \ 'subseparator': { 'left': '', 'right': '' }
+    \ }
+function! LightlineReadonly()
+    return &readonly ? '' : ''
+endfunction
+function! LightlineFugitive()
+    if exists('*FugitiveHead')
+        let branch = FugitiveHead()
+        return branch !=# '' ? ''.branch : ''
+    endif
+    return ''
+endfunction
+" }}}
+
+" == Setting leaderf {{{
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_ShortcutF = '<c-p>'
+let g:Lf_ShortcutB = '<c-n>'
+let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+" }}}
+
+" vim: fdm=marker:et:ts=4:sw=4:sts=4
