@@ -92,6 +92,23 @@ endfunction
 nnoremap <F9> :NERDTreeFind<CR>
 " }}}
 
+" == Setting easymotion {{{
+let g:EasyMotion_do_mapping = 0
+nmap <C-s> <Plug>(easymotion-s)
+" }}}
+
+" == Setting undotree {{{
+nnoremap <F5> :UndotreeToggle<CR>
+if has("persistent_undo")
+    if !isdirectory($HOME."/.undodir")
+        call mkdir($HOME."/.undodir", "p", 0700)
+    endif
+
+    set undodir=~/.undodir
+    set undofile
+endif
+" }}}
+
 " == Setting leaderf {{{
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PopupColorscheme = 'onedark'
@@ -99,7 +116,6 @@ let g:Lf_PreviewInPopup = 1
 let g:Lf_ShortcutF = '<c-p>'
 let g:Lf_ShortcutB = '<c-n>'
 let g:Lf_StlSeparator = { 'left': '', 'right': '' }
-"let g:Lf_EverythingEsPath = 'D:\ES\es.exe'
 
 noremap <F7> :<C-U><C-R>=printf("Leaderf gtags")<CR><CR>
 noremap <F8> :<C-U><C-R>=printf("Leaderf bufTag")<CR><CR>
